@@ -14,7 +14,18 @@
 
 int main(int argc, char **argv)
 {
-	char cmdline[MAXBUF]; // stores user input from commmand line
-
-	return 0;
+    while (1) {
+        char *inputStr = promptUser("dhs> ");
+        char **tokens = split(inputStr, " ");
+        if (tokens[0][0] == '/' || (tokens[0][0] == '.' && tokens[0][1] == '/')) {
+            runExe(tokens);
+        } else {
+            mode2(tokens);
+        }
+        free(inputStr);
+        free(tokens);
+    }
+    
+    return 0;
+	
 }
